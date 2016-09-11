@@ -7,12 +7,9 @@ app = Flask(__name__)
 def index():
     address = request.values.get('address')
     term = request.values.get('term')
-    businesses = []
+    businesses = [] # Sets business to empty list prior to user input
     if address:
-        businesses = yelp_api.get_businesses(term, address)
-    # forecast = None
-    # if address:
-    #     forecast = weather.get_weather(address)
+        businesses = yelp_api.get_businesses(term, address) # If user inputs address, get_business function called
     return render_template('index.html', businesses=businesses)
 
 @app.route('/about')
