@@ -5,16 +5,31 @@
 	<body>
 		<div class="jumbotron">
 			<div class="container">
-				{% if forecast %}
-					<h1>{{ forecast }}</h1>
-					<a href="{{ url_for('index') }}">Look up another address</a>
+				{% if businesses %}
+					<h1>Soups On!</h1>
+						<p>Here's what we recommend:</p>
+						<ul class="list-unstyled">{% for business in businesses %}
+							<li>
+								<li><strong>{{ business.name }}</strong></li>
+								<li>Rating: {{ business.rating }}</li>
+								<li>Phone: {{ business.display_phone }}</li>
+								<li><a href="{{ business.url }}">View on Yelp</a></li>
+							</li>
+						{% endfor %}</ul>
+					<a href="{{ url_for('index') }}">Try another search</a>
 				{% else %}
-					<h1>Hello! Where do you live?</h1>
-					<form action="/" class="form-inline">
+					<h1>Welcome to Food Finder!</h1>
+						<p>Tell us where you are, and we'll tell you where to eat!</p>
+					<form action="/">
 						<div class="form-group">
-							<input type="text" name="address" placeholder="City, state" class="form-control">
-							<input type="submit" value="Submit" class="btn btn-primary">
+							<label for="address">Where are you?</label>
+							<input type="text" name="address" placeholder="City" class="form-control">
 						</div>
+						<div class="form-group"
+							<p>What are you in the mood for? Not sure? Then just say food!</p>
+							<input type="text" name="term" placeholder="eg, Italian food" class="form-control">
+						</div>
+						<input type="submit" value="Submit" class="btn btn-primary">
 					</form>
 				{% endif %}
 				<a href="{{ url_for('about') }}">About this project</a>
